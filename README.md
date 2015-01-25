@@ -1,10 +1,10 @@
 # Getting and Cleaning-Data
 ##Summary
-This projects summarizes the values recorded by sensors on a Samsung Galaxy S II smartphone worn by different test subjects performing differnent activities.   There are 30 different subjects performing 6 different activities: Laying, Sitting, Standing, Walking, Walking Downstairs, Walking Upstairs.   The results are the average of all readings for each subject and activity for 79 different variables.  Therefore the summary contains 180 obserations (30 subjects * 6 activities) and 79 variables for each combination of subject and activity.
+This project summarizes the values recorded by sensors on a Samsung Galaxy S II smartphone worn by different test subjects performing differnent activities.   There are 30 different subjects performing 6 different activities: Laying, Sitting, Standing, Walking, Walking Downstairs, Walking Upstairs.   The results are the average of 79 variables for each subject and activity.  Therefore the summary contains 180 obserations (30 subjects * 6 activities) and 79 variables for each combination of subject and activity.
 
 The results of the analysis are in the Summary.txt file.
 
-Details of 79 measures from the sensors are given in the cookbook.md file
+Details of the 79 variables are given in the cookbook.md file
 
 ## run_analysis.R file
 This R script loads the raw data and creates the Summary.txt file. This section describes the process for converting the raw data into the summary .
@@ -14,7 +14,7 @@ The raw data was obtained from https://d396qusza40orc.cloudfront.net/getdata%2Fp
 The script requires the dplyr package to be installed.  
 
 ### loading the data
-The raw dataset was into two subsets, Training Data and Test Data:  The test data was as follows.  The trainign data followed the same pattern.
+The raw dataset was into two subsets, Training Data and Test Data:  The test data was as follows.  The training data followed the same pattern.
 
 * x_train.txt - 10299 sensor readings for 561 variables. Loaded into the traindata dataframe
 * subject_train.txt - the subject number for each of the 10299 sensor readings.  Loaded into the trainsubjects dataframe
@@ -24,7 +24,7 @@ In addition the following files were included in the raw data
 * features.txt - the names of the 561 variables in the x_train.txt and x_test.txt files.  Loaded into columnheaders dataset  The names were cleaned up to remove "()" and "-" characters using the make.names function and stored columnheaders$cleannames
 * activity_labels.txt - the name of each activity corresponding to the activity number in y_train.txt and y_test.txt
 
-### Step 1 - Merged the Test an Trainign Data
+### Step 1 - Merged the Test and Training Data
 1.  The traindata dataframe testdata dataframes were merged into the rawdata dataframe using the rbind statement.
 2.  Column names were added from columnheaders$cleannames 
 3.  The testactivitynum subjects and trainactivitynum dataframes were merged into the activitynum datafrane using the rbind statement (used in step2)
@@ -33,7 +33,7 @@ In addition the following files were included in the raw data
 The resulting rawdata dataframe containes 10299 oberservations (7352 training observations plus 2947 test obserations) of 561 sensor readings 
 
 ### Step 2 Extract only the Mean and Standard Deviation variables
-We are only interested in the variables that measure the average or standard deviation of specific sensor variables. The dplyr select statement was used to select only those columns with "mean" or "std" in the name.  The grep function was used to find the colunns with "mean" or "std" in the column name.  The results were stored in a dataframe called data.
+We are only interested in the variables that measure the average or standard deviation of specific sensor variables. The dplyr select statement was used to select only those columns with "mean" or "std" in the name.  79 variables matched this criteria using the grep function.   The results were stored in a dataframe called data.
 
 Columns for the subject number and activity number were added to the data by combinding the rawdata, activitynum,  subjects dataframes using the cbind statement.  
 
@@ -59,9 +59,10 @@ The variable names contained a lot of abbreviations.  Using sub and gsub stateme
 ### Step 5 Summarize the Data
 
 So far we have 10299 observations of 79 variables for different subjects performing different activities. We summarize these results by taking the average value of each variable for each subject and activity as follows:
-1.  Group the data by Subject and Activity Name using the dplyr group_by function
-2.  Calculate the average of each variable for each group using the dplyr summarise_each function
-3.  Sort the results by subject then activity using hte dlplyr arrange function.
+
+1.  Group the data by Subject and Activity Name using the dplyr group_by function.
+2.  Calculate the average of each variable for each group using the dplyr summarise_each function.
+3.  Sort the results by subject then activity using the dlplyr arrange function.
 4.  Append the word "Average" to the begining of each varaible name with the colnames function to indicate we are now measuring the average for the group.
 
 The results were stored in the sumdata dataframe and then output to summary.txt
