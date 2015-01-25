@@ -49,8 +49,9 @@ The variable names contained a lot of abbreviations.  Using sub and gsub stateme
 *  f - Frequency
 *  . - [removed dots]
 *  mean - Mean
-*  gyro - Gyrometer
-*  mag - Magnitude
+*  Gyro - Gyrometer
+*  Mag - Magnitude
+*  Acc - Acceleration
 *  std - StandardDeviation
 *  X - XAxis
 *  Y - YAxis
