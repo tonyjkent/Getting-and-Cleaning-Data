@@ -1,6 +1,6 @@
 # Getting and Cleaning-Data
 ##Summary
-This projects summarizes the values records by sensors on a Samsung Galaxy S II smartphone worn by different test subjects performing differnent activities.   There are 30 different subjects performing 6 different activities: Laying, Sitting, Standing, Walking, Walking Downstairs, Walking Upstairs.   The results are the average of all readings for each subject and activity for 79 different variables.  Therefore the summary contains 180 obserations (30 subjects * 6 activities) and 79 variables for each combination of subject and activity.
+This projects summarizes the values recorded by sensors on a Samsung Galaxy S II smartphone worn by different test subjects performing differnent activities.   There are 30 different subjects performing 6 different activities: Laying, Sitting, Standing, Walking, Walking Downstairs, Walking Upstairs.   The results are the average of all readings for each subject and activity for 79 different variables.  Therefore the summary contains 180 obserations (30 subjects * 6 activities) and 79 variables for each combination of subject and activity.
 
 The results of the analysis are in the Summary.txt file.
 
@@ -14,7 +14,7 @@ The raw data was obtained from https://d396qusza40orc.cloudfront.net/getdata%2Fp
 The script requires the dplyr package to be installed.  
 
 ### loading the data
-The raw dataset was into two subsets, Trainign Data and Test Data:  The test data was as follows.  The trainign data followed the same pattern
+The raw dataset was into two subsets, Training Data and Test Data:  The test data was as follows.  The trainign data followed the same pattern.
 
 * x_train.txt - 10299 sensor readings for 561 variables. Loaded into the traindata dataframe
 * subject_train.txt - the subject number for each of the 10299 sensor readings.  Loaded into the trainsubjects dataframe
@@ -25,10 +25,10 @@ In addition the following files were included in the raw data
 * activity_labels.txt - the name of each activity corresponding to the activity number in y_train.txt and y_test.txt
 
 ### Step 1 - Merged the Test an Trainign Data
-1.  The traindata dataframe testdata dataframes were merged into a rawdata dataframe using the rbind statement.
+1.  The traindata dataframe testdata dataframes were merged into the rawdata dataframe using the rbind statement.
 2.  Column names were added from columnheaders$cleannames 
-3.  The testactivitynum subjects and trainactivitynum dataframes were merged into the activitynum datafrane using the rbind statement 
-4.  The testsubjects and trainsubjects dataframes were merged into the subjects dataframe using the rbind statement 
+3.  The testactivitynum subjects and trainactivitynum dataframes were merged into the activitynum datafrane using the rbind statement (used in step2)
+4.  The testsubjects and trainsubjects dataframes were merged into the subjects dataframe using the rbind statement (used in step 2)
 
 The resulting rawdata dataframe containes 10299 oberservations (7352 training observations plus 2947 test obserations) of 561 sensor readings 
 
@@ -43,7 +43,7 @@ The resulting data dataframe contains 10299 observations of just  79 varaiables 
 The descriptive Activity Name was added to the data dataframe by joining the activityname dataframe with the data dataframe using the merge statement.  The common key was the activity number column.
 
 ### Step 4 Make the Variable Names more descriptive
-THe variable names contained a lot of abbreviations.  Using sub and gsub statements the following abbreviations were expanded to make them more descriptive or more readable:
+The variable names contained a lot of abbreviations.  Using sub and gsub statements the following abbreviations were expanded to make them more descriptive or more readable:
 
 *  t - Time
 *  f - Frequency
