@@ -4,7 +4,7 @@ This project summarizes the values recorded by sensors on a Samsung Galaxy S II 
 
 The results of the analysis are in the Summary.txt file.
 
-Details of the 79 variables are given in the cookbook.md file
+An explanation of the data in Summary.txt is in the Code Book included in the repository
 
 ## run_analysis.R file
 This R script loads the raw data and creates the Summary.txt file. This section describes the process for converting the raw data into the summary .
